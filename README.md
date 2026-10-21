@@ -11,7 +11,7 @@ Client side only. Requires JEI for Minecraft 1.21.1 on NeoForge.
 Use JDK 21:
 
 ```bash
-_tools/gw <path-to-this-repo> build
+./gradlew build
 ```
 
 The jar is written to `build/libs/just-enough-right-clicks-0.1.0+neoforge-1.21.1.jar`.
@@ -25,7 +25,6 @@ java -Djustenoughrightclicks.verify=true ... nogui
 ```
 
 It logs the entry count and writes `config/justenoughrightclicks-dump.txt`.
-The 2026-10-21 run is recorded in `_docs/VERIFY.md`.
 
 ## License
 

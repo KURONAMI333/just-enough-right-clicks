@@ -122,6 +122,10 @@ neoForge {
 configurations {
     runtimeClasspath.extendsFrom localRuntime
 }
+// runClient host stack lives in runclient-hosts.gradle (gitignored, dev-only). Applied if present.
+if (file('runclient-hosts.gradle').exists()) {
+    apply from: 'runclient-hosts.gradle'
+}
 
 dependencies {
     // JEI: the API is compile-time only, the full artifact is for dev runtime.

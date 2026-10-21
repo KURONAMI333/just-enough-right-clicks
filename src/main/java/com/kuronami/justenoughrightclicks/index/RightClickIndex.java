@@ -108,11 +108,18 @@ public final class RightClickIndex {
 
         int errors = 0;
         for (Block block : blocks) {
-            if (block.asItem() == Items.AIR) {
+            String blockId = id(block);
+            BlockState state;
+            try {
+                if (block.asItem() == Items.AIR) {
+                    continue;
+                }
+                state = block.defaultBlockState();
+            } catch (Exception | LinkageError t) {
+                errors++;
+                LOGGER.warn("[justenoughrightclicks] skipped {}: {}", blockId, t.toString());
                 continue;
             }
-            BlockState state = block.defaultBlockState();
-            String blockId = id(block);
 
             for (Probe probe : PROBES) {
                 List<ItemStack> held = tools.get(probe.ability());
@@ -124,7 +131,7 @@ public final class RightClickIndex {
                             held.get(0).copy(), hit);
                     BlockState result = state.getToolModifiedState(context, probe.ability(), true);
                     accept(rows, block, result, held, probe.action());
-                } catch (Throwable t) {
+                } catch (Exception | LinkageError t) {
                     errors++;
                     LOGGER.warn("[justenoughrightclicks] skipped {} / {}: {}", blockId, probe.action(), t.toString());
                 }
@@ -135,7 +142,7 @@ public final class RightClickIndex {
                 if (waxed.isPresent()) {
                     accept(rows, block, waxed.get(), List.of(new ItemStack(Items.HONEYCOMB)), ACTION_WAX);
                 }
-            } catch (Throwable t) {
+            } catch (Exception | LinkageError t) {
                 errors++;
                 LOGGER.warn("[justenoughrightclicks] skipped {} / {}: {}", blockId, ACTION_WAX, t.toString());
             }
