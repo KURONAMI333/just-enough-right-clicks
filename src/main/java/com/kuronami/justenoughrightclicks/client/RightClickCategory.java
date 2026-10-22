@@ -20,7 +20,7 @@ public final class RightClickCategory extends AbstractRecipeCategory<RightClickI
     public static final RecipeType<RightClickIndex.Entry> TYPE = RecipeType.create(
             JustEnoughRightClicks.MODID, "right_clicks", RightClickIndex.Entry.class);
 
-    private static final int WIDTH = 86;
+    private static final int WIDTH = 92;
     private static final int HEIGHT = 26;
 
     private final IDrawable arrow;
@@ -35,13 +35,13 @@ public final class RightClickCategory extends AbstractRecipeCategory<RightClickI
 
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, RightClickIndex.Entry recipe, IFocusGroup focuses) {
-        builder.addInputSlot(2, 4)
+        builder.addInputSlot(2, 5)
                 .setStandardSlotBackground()
                 .addItemStack(recipe.from());
-        builder.addInputSlot(20, 4)
+        builder.addInputSlot(20, 5)
                 .setStandardSlotBackground()
                 .addItemStacks(recipe.held());
-        builder.addOutputSlot(62, 4)
+        builder.addOutputSlot(70, 5)
                 .setOutputSlotBackground()
                 .addItemStack(recipe.to());
     }
